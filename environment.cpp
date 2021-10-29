@@ -1,53 +1,33 @@
 #include "iostream"
 #include "environment.h"
-
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-
-#include "QLineEdit"
-#include "QMainWindow"
 using namespace std;
 
 environment::environment() {
-    //cin >> n;
-    n = 5;
-    //cin >> rounds;
-    rounds = 2;
+    n = 5;        //cin >> n;
+    rounds = 2;   //cin >> rounds;
     arr = new human[n];
 }
 environment::~environment(){ delete[] arr; }
 
 void environment::output_arr() {
+    // Output all people money
     cout << "Array of ints: ";
     for (int i = 0; i < n; i++)
         cout << arr[i].get_money() << " ";
     cout << endl;
 }
 void environment::set_trust_flags() {
-    //bool flag;
+    //bool flag; // Flag of trust, will he trust or not
     for (int i = 0; i < n; i++) {
         //cin >> flag;
-        arr[i].set_trust(1);
+        arr[i].set_trust(1); // Temporarily input a constant
     }
-    cout << endl;
 }
 void environment::game() {
-    // 1 && 1
-    // 	+2 +2
-    //
-    // 1 && 0
-    // 	-1 +3
-    //
-    // 0 && 1
-    // 	+3 -1
-    //
-    // 0 && 0
-    // 	+0 +0
-    //
-    // Game, counting moneys, 1 round
-    for (int r = 0; r < rounds; r++)
-        for (int i = 0; i < n; i++)
-            for (int j = i + 1; j < n; j++)
+    // Game / Counting money
+    for (int r = 0; r < rounds; r++)         // rounds
+        for (int i = 0; i < n; i++)          // Each human
+            for (int j = i + 1; j < n; j++)  // Plays with the remaining one
             {
                 bool trust_a = arr[i].get_trust();
                 bool trust_b = arr[j].get_trust();
