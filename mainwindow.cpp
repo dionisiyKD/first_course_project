@@ -13,8 +13,9 @@ MainWindow::~MainWindow() {
 
 void MainWindow::on_pushButton_clicked() {
     environment A;
-    A.output_arr();
-    A.set_trust_flags();
+    A.create_distrustful(15);
+    A.create_naive(10);
+
     A.game();
     A.output_arr();
 }

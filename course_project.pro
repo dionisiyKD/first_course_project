@@ -11,12 +11,14 @@ CONFIG += c++11
 SOURCES += \
     environment.cpp \
     human.cpp \
+    list.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     environment.h \
     human.h \
+    list.h \
     mainwindow.h
 
 FORMS += \
