@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/content">
+        <file>MainWindow.qml</file>
+        <file>images/ev.png</file>
+    </qresource>
+</RCC>
