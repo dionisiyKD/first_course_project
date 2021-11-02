@@ -24,6 +24,7 @@ public:
 
     void output_arr();
     void game();
+
 };
 
 #endif // ENVIRONMENT_H
