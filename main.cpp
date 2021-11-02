@@ -20,4 +20,6 @@ int main(int argc, char *argv[])
     QQmlContext * rootContext = view.engine()->rootContext();
     rootContext->setContextProperty("Btn_Click", &btn);
     return app.exec();
+
+    //
 }
