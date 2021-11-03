@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlEngine>
+#include <QQmlApplicationEngine>
 #include <QQmlFileSelector>
 #include <QQuickView>
 #include <QQmlContext>
@@ -9,15 +10,17 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     Start_btn btn;
-    QQuickView view;
-    view.connect(view.engine(), &QQmlEngine::quit, &app, &QCoreApplication::quit);
-    view.setSource(QUrl("qrc:/content/MainWindow.qml"));
-    if (view.status() == QQuickView::Error)
-        return -1;
-    view.setResizeMode(QQuickView::SizeRootObjectToView);
-    view.show();
+    QQmlApplicationEngine engine;
 
-    QQmlContext * rootContext = view.engine()->rootContext();
+    const QUrl url(QStringLiteral("qrc:/content/MainWindow.qml"));
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
+                     &app, [url](QObject *obj, const QUrl &objUrl) {
+        if (!obj && url == objUrl)
+            QCoreApplication::exit(-1);
+    }, Qt::QueuedConnection);
+    engine.load(url);
+
+    QQmlContext * rootContext = engine.rootContext();
     rootContext->setContextProperty("Btn_Click", &btn);
     return app.exec();
 }

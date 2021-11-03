@@ -2,5 +2,15 @@
     <qresource prefix="/content">
         <file>MainWindow.qml</file>
         <file>images/ev.png</file>
+        <file>game_screen.qml</file>
+        <file>images/Detective_img.png</file>
+        <file>images/Distrustful_img.png</file>
+        <file>images/Forgiving_img.png</file>
+        <file>images/Naive_img.png</file>
+        <file>images/Persistent_img.png</file>
+        <file>images/Random_img.png</file>
+        <file>images/Simulator_img.png</file>
+        <file>images/Tricky_img.png</file>
+        <file>images/Vindictive_img.png</file>
     </qresource>
 </RCC>

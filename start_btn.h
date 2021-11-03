@@ -12,7 +12,7 @@ public:
 signals:
 
 public slots:
-    void btn_clicked();
+    void btn_clicked(int, int, int, int, int, int, int, int, int);
 };
 
 #endif // START_BTN_H
