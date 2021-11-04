@@ -22,7 +22,12 @@ public:
     void create_Persistent(int amount);
     void create_forgiving(int amount);
 
+    void remove_element_from_tail(int amount);
+    void reset_money();
+
     void output_arr();
+    void output_types();
+    void min_to_max();
     void game();
 };
 

@@ -10,7 +10,7 @@ struct node {
 class list {
     node* head;
     node* tail;
-    int count;
+    int count;  // number of nodes
 public:
     list();
     ~list();
@@ -22,8 +22,11 @@ public:
     void add_tail(human* A);
     void insert_after(int index, human* A);
 
-    void remove(int index);
-    int search(human* A);
+    void insertionSort(); // max to min
+    void sortedInsert(node** head_ref, node** tail_ref, node* newNode);
+
+    void remove(int index); // by his number
+    int search(human* A);   // return index by data
 
     void print_from_head();
     void print_from_tail();
