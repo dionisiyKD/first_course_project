@@ -6,20 +6,35 @@
 using namespace std;
 
 // From the start everyone have 0 money, and trust everyone
-human::human() { money = 0; trust = 1; }
+human::human() { money = 0; trust = 1; type = 0; }
 void human::incr_money(int a) { money += a; }
 void human::decr_money(int a) { money -= a; }
 void human::set_money(int a)  { money = a; }
 int  human::get_money()       { return money; }
 void human::set_trust(bool a) { trust = a; }
 bool human::get_trust()       { return trust; }
+int human::get_type()         { return type; }
 void human::after_round(bool enemy_choice) {
     return;
 }
 
+/*
 
+    Type
+1 - naive
+2 - distrustful
+3 - simulator
+4 - Tricky
+5 - detective
+6 - vindictive
+7 - random
+8 - Persistent
+9 - forgiving
+
+*/
 
 naive::naive() {
+    type = 1;
     trust = 1;
 }
 bool naive::will_i_trust() {
@@ -27,6 +42,7 @@ bool naive::will_i_trust() {
 }
 
 distrustful::distrustful() {
+    type = 2;
     trust = 0;
 }
 bool distrustful::will_i_trust() {
@@ -34,6 +50,7 @@ bool distrustful::will_i_trust() {
 }
 
 simulator::simulator() {
+    type = 3;
     // First time he trust
     last_enemy_choice = 1;
 }
@@ -52,6 +69,7 @@ void simulator::after_round(bool enemy_choice) {
 }
 
 Tricky::Tricky() {
+    type = 4;
     // First time he trust
     last_enemy_choice = 0;
 }
@@ -70,6 +88,7 @@ void Tricky::after_round(bool enemy_choice) {
 }
 
 detective::detective() {
+    type = 5;
     number_of_rounds = 1;
     was_deceived = 0;
     last_enemy_choice = 0;
@@ -115,6 +134,7 @@ void detective::after_round(bool enemy_choice) {
 }
 
 vindictive::vindictive() {
+    type = 6;
     was_deceived = 0;
 }
 bool vindictive::get_was_deceived() {
@@ -135,6 +155,7 @@ void vindictive::after_round(bool enemy_choice) {
 }
 
 random::random() {
+    type = 7;
     srand((unsigned int)(time(0)));
 }
 bool random::will_i_trust() {
@@ -142,6 +163,7 @@ bool random::will_i_trust() {
 }
 
 Persistent::Persistent() {
+    type = 8;
     last_mine_choice = 1;
 }
 void Persistent::set_last_mine_choice(bool a) {
@@ -156,6 +178,7 @@ bool Persistent::will_i_trust() {
 }
 
 forgiving::forgiving() {
+    type = 9;
     how_many_times_was_deceived = 0;
     will_i_deceive = 0;
 }
