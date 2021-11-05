@@ -30,6 +30,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     MainWindow.qml \
+    exam_1.qml \
+    exam_2.qml \
+    exam_3.qml \
+    exam_4.qml \
+    exam_5.qml \
     game_screen.qml
 
 RESOURCES += \

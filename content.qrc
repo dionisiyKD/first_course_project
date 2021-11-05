@@ -12,5 +12,6 @@
         <file>images/Simulator_img.png</file>
         <file>images/Tricky_img.png</file>
         <file>images/Vindictive_img.png</file>
+        <file>exam_1.qml</file>
     </qresource>
 </RCC>
