@@ -3,6 +3,7 @@
 
 class human {
 protected:
+    int type;
     int money;  // Amount of money
     bool trust; // Flag of trust
 public:
@@ -14,6 +15,8 @@ public:
     int get_money();
     void set_trust(bool a);
     bool get_trust();
+
+    int get_type();
 
     virtual bool will_i_trust() = 0;
     virtual void after_round(bool enemy_choice);

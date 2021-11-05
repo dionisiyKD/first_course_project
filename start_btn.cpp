@@ -20,5 +20,6 @@ void Start_btn::btn_clicked(int n1, int n2, int n3, int n4, int n5, int n6, int 
     A.create_random(n9);
 
     A.game();
+    A.output_types();
     A.output_arr();
 }
