@@ -5,13 +5,14 @@
 #include <QQuickView>
 #include <QQmlContext>
 #include "start_btn.h"
+#include <QApplication>
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
     Start_btn btn;
     QQmlApplicationEngine engine;
-
+    app.setQuitOnLastWindowClosed(false);
     const QUrl url(QStringLiteral("qrc:/content/MainWindow.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

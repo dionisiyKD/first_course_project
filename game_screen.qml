@@ -6,6 +6,7 @@ Window {
     width: 1280
     height: 720
     visible: true
+
     property var chose_exit: null
 
         function create_chose_exit() {
@@ -506,6 +507,7 @@ Window {
             border.width: 3
             border.color: "black"
         }
+
         onClicked: {
             label4.text = spinBox.value
             label5.text = spinBox1.value

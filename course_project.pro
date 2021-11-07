@@ -20,6 +20,7 @@ HEADERS += \
     environment.h \
     human.h \
     list.h \
+    my_exception.h \
     start_btn.h
 
 

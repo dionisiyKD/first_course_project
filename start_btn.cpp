@@ -1,5 +1,6 @@
 #include "start_btn.h"
 #include "environment.h"
+#include "my_exception.h"
 
 Start_btn::Start_btn(QObject *parent) : QObject(parent)
 {

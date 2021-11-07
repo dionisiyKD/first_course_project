@@ -53,5 +53,6 @@ Rectangle {
             radius: 3
             border.width: 3
         }
+         onClicked: exit_screen.destroyMe()
     }
 }
