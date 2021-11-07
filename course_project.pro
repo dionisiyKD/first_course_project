@@ -14,7 +14,6 @@ SOURCES += \
     human.cpp \
     list.cpp \
     start_btn.cpp
-    todo.cpp \
 
 HEADERS += \
     environment.h \
@@ -31,12 +30,26 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     MainWindow.qml \
+
     exam_1.qml \
     exam_2.qml \
     exam_3.qml \
     exam_4.qml \
     exam_5.qml \
     game_screen.qml
+
+    game_screen.qml \
+    rules_screen_1.qml \
+    rules_screen_2.qml \
+    rules_screen_3.qml \
+    rules_screen_4.qml \
+    rules_screen_5.qml \
+    rules_screen_6.qml \
+    rules_screen_7.qml \
+    rules_screen_8.qml \
+    rules_screen_9.qml \
+    rules_screen_main.qml
+
 
 RESOURCES += \
     content.qrc
