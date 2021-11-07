@@ -1,5 +1,5 @@
-import QtQuick 2.4
-import QtQuick.Controls 2.4
+import QtQuick 2.15
+import QtQuick.Controls 2.15
 import QtQuick.Window 2.3
 Window {
     id: start
@@ -251,6 +251,95 @@ Window {
             font.pointSize: 26
             to: textField.text*1 - spinBox.value - spinBox1.value - spinBox2.value - spinBox3.value - spinBox4.value - spinBox5.value - spinBox6.value - spinBox7.value
         }
+        Label {
+            id: label11
+            x: 69
+            y: 112
+            text: qsTr("Вразливий")
+            font.pointSize: 14
+            font.bold: true
+            font.family: "Verdana"
+        }
+
+        Label {
+            id: label12
+            x: 69
+            y: 239
+            text: qsTr("Довірливий")
+            font.bold: true
+            font.pointSize: 14
+            font.family: "Verdana"
+        }
+
+        Label {
+            id: label13
+            x: 69
+            y: 364
+            text: qsTr("Наполегливий")
+            font.bold: true
+            font.pointSize: 14
+            font.family: "Verdana"
+        }
+
+        Label {
+            id: label14
+            x: 69
+            y: 495
+            text: qsTr("Детектив")
+            font.bold: true
+            font.pointSize: 14
+            font.family: "Verdana"
+        }
+
+        Label {
+            id: label15
+            x: 69
+            y: 613
+            text: qsTr("Випадковий")
+            font.bold: true
+            font.pointSize: 14
+            font.family: "Verdana"
+        }
+
+        Label {
+            id: label16
+            x: 405
+            y: 112
+            text: qsTr("Хитрий")
+            font.bold: true
+            font.pointSize: 14
+            font.family: "Verdana"
+        }
+
+        Label {
+            id: label17
+            x: 405
+            y: 239
+            text: qsTr("Поблажливий")
+            font.bold: true
+            font.pointSize: 14
+            font.family: "Verdana"
+        }
+
+        Label {
+            id: label18
+            x: 405
+            y: 364
+            text: qsTr("Симулятор")
+            font.bold: true
+            font.pointSize: 14
+            font.family: "Verdana"
+        }
+
+        Label {
+            id: label19
+            x: 405
+            y: 495
+            text: qsTr("Брехун")
+            font.bold: true
+            font.pointSize: 14
+            font.family: "Verdana"
+        }
     }
 
     Rectangle {
@@ -499,5 +588,6 @@ Window {
             Btn_Click.btn_clicked(spinBox.value, spinBox1.value, spinBox2.value, spinBox3.value, spinBox4.value, spinBox5.value, spinBox6.value, spinBox7.value, spinBox8.value)
         }
     }
+
 }
 
