@@ -1,5 +1,7 @@
+#include <iostream>
 #include "start_btn.h"
 #include "environment.h"
+using namespace std;
 
 Start_btn::Start_btn(QObject *parent) : QObject(parent)
 {
@@ -19,7 +21,10 @@ void Start_btn::btn_clicked(int n1, int n2, int n3, int n4, int n5, int n6, int 
     A.create_distrustful(n8);
     A.create_random(n9);
 
+    A.set_rounds(5);
+    A.set_amount_of_deletion(2);
     A.game();
+
+    cout << "Totel result:\n\n";
     A.output_types();
-    A.output_arr();
 }
