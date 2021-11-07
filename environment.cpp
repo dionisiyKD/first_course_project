@@ -1,6 +1,7 @@
 #include "iostream"
 #include "environment.h"
 #include "human.h"
+#include "my_exception.h"
 using namespace std;
 
 environment::environment() {
@@ -73,6 +74,10 @@ void environment::create_forgiving(int amount) {
     }
 }
 
+
+int environment::get_number(){
+    return n;
+}
 int  environment::get_rounds(){
     return rounds;
 }
@@ -172,6 +177,18 @@ void environment::min_to_max() {
 
 }
 void environment::game() {
+    try{
+
+    if(n == 0)
+    {
+    throw my_exception (1);
+    }
+
+    if( n == 1)
+    {
+    throw my_exception (2);
+    }
+
     for (int r = 0; r < rounds; r++) {        // rounds
         reset_money();
         for (int i = 0; i < n; i++)           // Each human
@@ -210,4 +227,8 @@ void environment::game() {
         output_arr();
         min_to_max();
     }
+    }
+
+    catch (my_exception ex) {}
+    catch (my_exception ex) {}
 }

@@ -1,7 +1,9 @@
 #include <iostream>
 #include "start_btn.h"
 #include "environment.h"
+#include "my_exception.h"
 using namespace std;
+
 
 Start_btn::Start_btn(QObject *parent) : QObject(parent)
 {
