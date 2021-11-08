@@ -4,8 +4,7 @@
 class human {
 protected:
     int type;
-    int money;  // Amount of money
-    bool trust; // Flag of trust
+    int money;
 public:
     human();
     void incr_money(int a);

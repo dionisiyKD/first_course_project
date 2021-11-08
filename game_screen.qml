@@ -6,6 +6,26 @@ Window {
     width: 1280
     height: 720
     visible: true
+
+    property var chose_exit: null
+
+        function create_chose_exit() {
+            if ( chose_exit === null ) {
+                var component = Qt.createComponent( "qrc:/content/exam_1.qml" )
+                chose_exit = component.createObject( start, {"x":start.width/4,"y":start.height*0.2})
+                if ( chose_exit ) {
+
+                    chose_exit.destroyMe.connect( destroy_chose_exit )
+                }
+            }
+        }
+
+        function destroy_chose_exit() {
+            if ( chose_exit !== null ) {
+                chose_exit.destroy()
+                chose_exit = null
+            }
+        }
     Rectangle {
         width: parent.width
         height: parent.height
@@ -26,10 +46,11 @@ Window {
             border.color: "black"
         }
         onClicked: {
-            var component = Qt.createComponent("qrc:/content/MainWindow.qml")
+          /*  var component = Qt.createComponent("qrc:/content/MainWindow.qml")
             var window    = component.createObject(start)
             start.close()
-            window.show()
+            window.show() */
+            create_chose_exit()
         }
     }
     Rectangle {
@@ -575,6 +596,7 @@ Window {
             border.width: 3
             border.color: "black"
         }
+
         onClicked: {
             label4.text = spinBox.value
             label5.text = spinBox1.value
