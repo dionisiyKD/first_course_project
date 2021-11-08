@@ -91,5 +91,31 @@ Rectangle {
             stackview.push("qrc:/content/rules_screen_2.qml")
         }
     }
+
+    Button {
+        id: prev_button
+        x: 749
+        y: 511
+        width: 402
+        height: 73
+        text: qsTr("Назад")
+        font.pointSize: 20
+        font.capitalization: Font.MixedCase
+        font.styleName: "#000000"
+        background: Rectangle {
+            color: "#ffffff"
+            radius: 3
+            border.width: 3
+        }
+        font.weight: Font.ExtraBold
+        font.family: "Verdana"
+        onClicked: stackview.pop()
 }
 }
+}
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;formeditorZoom:0.5;height:480;width:640}
+}
+##^##*/
