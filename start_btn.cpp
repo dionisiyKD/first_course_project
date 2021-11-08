@@ -27,6 +27,6 @@ void Start_btn::btn_clicked(int n1, int n2, int n3, int n4, int n5, int n6, int 
     A.set_amount_of_deletion(2);
     A.game();
 
-    cout << "Totel result:\n\n";
-    A.output_types();
+    cout << "Total result:\n\n";
+   // A.output_types();
 }
