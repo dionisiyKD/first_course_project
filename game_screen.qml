@@ -26,6 +26,8 @@ Window {
                 chose_exit = null
             }
         }
+
+
     Rectangle {
         width: parent.width
         height: parent.height
@@ -46,10 +48,6 @@ Window {
             border.color: "black"
         }
         onClicked: {
-          /*  var component = Qt.createComponent("qrc:/content/MainWindow.qml")
-            var window    = component.createObject(start)
-            start.close()
-            window.show() */
             create_chose_exit()
         }
     }

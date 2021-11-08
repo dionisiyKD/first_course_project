@@ -7,6 +7,27 @@ Window {
     height: 720
     visible: true
     title: qsTr("Project")
+
+    property var exit: null
+
+        function create_exit() {
+            if ( exit === null ) {
+                var component = Qt.createComponent( "qrc:/content/exam_5.qml" )
+                exit = component.createObject( main, {"x":main.width/4,"y":main.height*0.2})
+                if ( exit ) {
+
+                    exit.destroyMe.connect( destroy_exit )
+                }
+            }
+        }
+
+        function destroy_exit() {
+            if ( exit !== null ) {
+                exit.destroy()
+                exit = null
+            }
+        }
+
 Rectangle {
     width: parent.width
     height: parent.height
@@ -57,18 +78,15 @@ Rectangle {
             font.capitalization: Font.MixedCase
             font.family: "Verdana"
             font.pointSize: 20
-            signal qmlSignal()
-            onClicked: {
-                var component = Qt.createComponent("qrc:/content/game_screen.qml")
-                var window    = component.createObject(main)
-                main.close()
-                window.show()
-            }
             background: Rectangle {
                             color: "white"
                             radius: 3
                             border.width: 3
             }
+            onClicked: {
+                create_exit()
+            }
+
 
         }
         Button {

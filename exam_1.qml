@@ -14,7 +14,7 @@ signal destroyMe()
         y: 102
         width: 331
         height: 116
-        text: "Ви впевнені, що хочете вийти? \nУ разі повернення на головне меню, \n прогрес буде анульовано"
+        text: "Ви впевнені, що хочете вийти? \nУ разі виходу з гри, \n прогрес буде анульовано"
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         font.pointSize: 14
@@ -53,11 +53,13 @@ signal destroyMe()
             border.width: 3
         }
         onClicked: {
+
             exit_screen.destroyMe()
+            start.close()
             /*var component = Qt.createComponent("qrc:/content/MainWindow.qml")
             var window    = component.createObject(start)
             window.show() */
-            start.close()
+
         }
     }
 
@@ -77,3 +79,4 @@ signal destroyMe()
         onClicked: exit_screen.destroyMe()
     }
 }
+
