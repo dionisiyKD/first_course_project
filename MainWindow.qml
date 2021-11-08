@@ -88,12 +88,6 @@ Rectangle {
                             radius: 3
                             border.width: 3
             }
-            onClicked: {
-                var component = Qt.createComponent("qrc:/content/rules_screen_main.qml")
-                var window    = component.createObject(main)
-                main.close()
-                window.show()
-            }
 
         }
         Button {

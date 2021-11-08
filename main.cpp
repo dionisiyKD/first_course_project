@@ -4,15 +4,15 @@
 #include <QQmlFileSelector>
 #include <QQuickView>
 #include <QQmlContext>
+#include <filesystem.h>
 #include "start_btn.h"
-#include <QApplication>
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
     Start_btn btn;
     QQmlApplicationEngine engine;
-    app.setQuitOnLastWindowClosed(false);
+
     const QUrl url(QStringLiteral("qrc:/content/MainWindow.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
@@ -23,5 +23,9 @@ int main(int argc, char *argv[])
 
     QQmlContext * rootContext = engine.rootContext();
     rootContext->setContextProperty("Btn_Click", &btn);
+
+  JSONFormat* file = new JSONFormat;
+  file->writeToFile();
+  file->readFromFile();
     return app.exec();
 }

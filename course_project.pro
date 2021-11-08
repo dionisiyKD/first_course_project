@@ -9,17 +9,20 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    filesystem.cpp \
     main.cpp \
     environment.cpp \
     human.cpp \
     list.cpp \
     start_btn.cpp
+    todo.cpp \
 
 HEADERS += \
+    InfroForFile.h \
     environment.h \
+    filesystem.h \
     human.h \
     list.h \
-    my_exception.h \
     start_btn.h
 
 
@@ -30,23 +33,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     MainWindow.qml \
-    exam_1.qml \
-    exam_2.qml \
-    exam_3.qml \
-    exam_4.qml \
-    exam_5.qml \
-    game_screen.qml \
-    game_screen.qml \
-    rules_screen_1.qml \
-    rules_screen_2.qml \
-    rules_screen_3.qml \
-    rules_screen_4.qml \
-    rules_screen_5.qml \
-    rules_screen_6.qml \
-    rules_screen_7.qml \
-    rules_screen_8.qml \
-    rules_screen_9.qml \
-    rules_screen_main.qml \
+    game_screen.qml
 
 RESOURCES += \
     content.qrc

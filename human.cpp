@@ -5,17 +5,22 @@
 #include "human.h"
 using namespace std;
 
-human::human() { money = 0; type = 0; }
+// From the start everyone have 0 money, and trust everyone
+human::human() { money = 0; trust = 1; type = 0; }
 void human::incr_money(int a) { money += a; }
 void human::decr_money(int a) { money -= a; }
 void human::set_money(int a)  { money = a; }
 int  human::get_money()       { return money; }
-int  human::get_type()        { return type; }
-void human::after_round(bool enemy_choice) { return; }
+void human::set_trust(bool a) { trust = a; }
+bool human::get_trust()       { return trust; }
+int human::get_type()         { return type; }
+void human::after_round(bool enemy_choice) {
+    return;
+}
 
 /*
 
-    Types
+    Type
 1 - naive
 2 - distrustful
 3 - simulator
@@ -30,21 +35,24 @@ void human::after_round(bool enemy_choice) { return; }
 
 naive::naive() {
     type = 1;
+    trust = 1;
 }
 bool naive::will_i_trust() {
-    return true;
+    return trust;
 }
 
 distrustful::distrustful() {
     type = 2;
+    trust = 0;
 }
 bool distrustful::will_i_trust() {
-    return false;
+    return trust;
 }
 
 simulator::simulator() {
     type = 3;
-    last_enemy_choice = 1;    // First time he trust
+    // First time he trust
+    last_enemy_choice = 1;
 }
 bool simulator::get_last_enemy_choice() {
     return last_enemy_choice;
@@ -62,7 +70,8 @@ void simulator::after_round(bool enemy_choice) {
 
 Tricky::Tricky() {
     type = 4;
-    last_enemy_choice = 0;    // First time he trust
+    // First time he trust
+    last_enemy_choice = 0;
 }
 bool Tricky::get_last_enemy_choice() {
     return last_enemy_choice;
@@ -197,3 +206,21 @@ void forgiving::after_round(bool enemy_choice) {
     if (how_many_times_was_deceived == 2)
         will_i_deceive = 1;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

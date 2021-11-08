@@ -1,31 +1,11 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick 2.4
+import QtQuick.Controls 2.4
 import QtQuick.Window 2.3
 Window {
     id: start
     width: 1280
     height: 720
     visible: true
-
-    property var chose_exit: null
-
-        function create_chose_exit() {
-            if ( chose_exit === null ) {
-                var component = Qt.createComponent( "qrc:/content/exam_1.qml" )
-                chose_exit = component.createObject( start, {"x":start.width/4,"y":start.height*0.2})
-                if ( chose_exit ) {
-
-                    chose_exit.destroyMe.connect( destroy_chose_exit )
-                }
-            }
-        }
-
-        function destroy_chose_exit() {
-            if ( chose_exit !== null ) {
-                chose_exit.destroy()
-                chose_exit = null
-            }
-        }
     Rectangle {
         width: parent.width
         height: parent.height
@@ -46,11 +26,10 @@ Window {
             border.color: "black"
         }
         onClicked: {
-          /*  var component = Qt.createComponent("qrc:/content/MainWindow.qml")
+            var component = Qt.createComponent("qrc:/content/MainWindow.qml")
             var window    = component.createObject(start)
             start.close()
-            window.show() */
-            create_chose_exit()
+            window.show()
         }
     }
     Rectangle {
@@ -271,95 +250,6 @@ Window {
             scale: 1.1
             font.pointSize: 26
             to: textField.text*1 - spinBox.value - spinBox1.value - spinBox2.value - spinBox3.value - spinBox4.value - spinBox5.value - spinBox6.value - spinBox7.value
-        }
-        Label {
-            id: label11
-            x: 69
-            y: 112
-            text: qsTr("Вразливий")
-            font.pointSize: 14
-            font.bold: true
-            font.family: "Verdana"
-        }
-
-        Label {
-            id: label12
-            x: 69
-            y: 239
-            text: qsTr("Довірливий")
-            font.bold: true
-            font.pointSize: 14
-            font.family: "Verdana"
-        }
-
-        Label {
-            id: label13
-            x: 69
-            y: 364
-            text: qsTr("Наполегливий")
-            font.bold: true
-            font.pointSize: 14
-            font.family: "Verdana"
-        }
-
-        Label {
-            id: label14
-            x: 69
-            y: 495
-            text: qsTr("Детектив")
-            font.bold: true
-            font.pointSize: 14
-            font.family: "Verdana"
-        }
-
-        Label {
-            id: label15
-            x: 69
-            y: 613
-            text: qsTr("Випадковий")
-            font.bold: true
-            font.pointSize: 14
-            font.family: "Verdana"
-        }
-
-        Label {
-            id: label16
-            x: 405
-            y: 112
-            text: qsTr("Хитрий")
-            font.bold: true
-            font.pointSize: 14
-            font.family: "Verdana"
-        }
-
-        Label {
-            id: label17
-            x: 405
-            y: 239
-            text: qsTr("Поблажливий")
-            font.bold: true
-            font.pointSize: 14
-            font.family: "Verdana"
-        }
-
-        Label {
-            id: label18
-            x: 405
-            y: 364
-            text: qsTr("Симулятор")
-            font.bold: true
-            font.pointSize: 14
-            font.family: "Verdana"
-        }
-
-        Label {
-            id: label19
-            x: 405
-            y: 495
-            text: qsTr("Брехун")
-            font.bold: true
-            font.pointSize: 14
-            font.family: "Verdana"
         }
     }
 
@@ -596,7 +486,6 @@ Window {
             border.width: 3
             border.color: "black"
         }
-
         onClicked: {
             label4.text = spinBox.value
             label5.text = spinBox1.value
@@ -610,6 +499,5 @@ Window {
             Btn_Click.btn_clicked(spinBox.value, spinBox1.value, spinBox2.value, spinBox3.value, spinBox4.value, spinBox5.value, spinBox6.value, spinBox7.value, spinBox8.value)
         }
     }
-
 }
 

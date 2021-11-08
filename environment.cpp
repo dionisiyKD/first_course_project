@@ -1,12 +1,15 @@
 #include "iostream"
 #include "environment.h"
 #include "human.h"
-#include "my_exception.h"
+#include "InfroForFile.h"
+
 using namespace std;
 
+extern struct environmentPsyche TypeOfPsyche ; // type structure
+
 environment::environment() {
-    n = 0;
-    rounds = 1;
+    n = 0;        //cin >> n;
+    rounds = 5;   //cin >> rounds;
 }
 environment::~environment() {}
 
@@ -74,122 +77,80 @@ void environment::create_forgiving(int amount) {
     }
 }
 
-
-int environment::get_number(){
-    return n;
-}
-int  environment::get_rounds(){
-    return rounds;
-}
-void environment::set_rounds(int a){
-    rounds = a;
-}
-int  environment::get_amount_of_deletion(){
-    return amount_of_deletion;
-}
-void environment::set_amount_of_deletion(int a){
-    amount_of_deletion = a;
-}
-
 void environment::remove_element_from_tail(int amount) {
-    for (int i = 0; i < amount; i++, n--)
+    for (int i = 0; i < amount; i++, n--) {
         arr.remove(n);
+    }
 }
 void environment::reset_money() {
     for (int i = 0; i < n; i++)
         arr.get_data(i)->set_money(0);
 }
 void environment::output_arr() {
+    // Output all people money
     arr.print_from_head();
 }
 void environment::output_types() {
-    cout << "\ntypes\n\n";
+    cout << "\ntypes\n";
     for (int i = 0; i < n; i++) {
-        switch (arr.get_data(i)->get_type()) {
-        case 1:
-            cout << "naive" << endl;
-            break;
-        case 2:
-            cout << "distrustful" << endl;
-            break;
-        case 3:
-            cout << "simulator" << endl;
-            break;
-        case 4:
-            cout << "Tricky" << endl;
-            break;
-        case 5:
-            cout << "detective" << endl;
-            break;
-        case 6:
-            cout << "vindictive" << endl;
-            break;
-        case 7:
-            cout << "random" << endl;
-            break;
-        case 8:
-            cout << "Persistent" << endl;
-            break;
-        case 9:
-            cout << "forgiving" << endl;
-            break;
-        default:
-            break;
-        }
+        cout << arr.get_data(i)->get_type() << endl;
     }
-    cout << endl;
 
 }
 void environment::min_to_max() {
+    int amount_of_insertion = 1;
+    arr.insertionSort();
     int max_type = arr.get_data(0)->get_type();
-    remove_element_from_tail(amount_of_deletion);
+    //int min_type = arr.get_data(n-1)->get_type(); по идее пофиг на тип минимального
+    remove_element_from_tail(amount_of_insertion);
+
     switch (max_type) {
     case 1:
-        create_naive(amount_of_deletion);
+        create_naive(amount_of_insertion);
+         // environmentPsyche::Naive = amount_of_insertion;
+        TypeOfPsyche.Naive =  amount_of_insertion; // сохраняю типов
+
         break;
     case 2:
-        create_distrustful(amount_of_deletion);
+        create_distrustful(amount_of_insertion);
+       TypeOfPsyche.Distrustful =  amount_of_insertion; // сохраняю типов
         break;
     case 3:
-        create_simulator(amount_of_deletion);
+        create_simulator(amount_of_insertion);
+      TypeOfPsyche.Simulator =  amount_of_insertion; // сохраняю типов
         break;
     case 4:
-        create_Tricky(amount_of_deletion);
+        create_Tricky(amount_of_insertion);
+       TypeOfPsyche.Tricky =  amount_of_insertion; // сохраняю типов
         break;
     case 5:
-        create_detective(amount_of_deletion);
+        create_detective(amount_of_insertion);
+        TypeOfPsyche.Detective =  amount_of_insertion; // сохраняю типов
         break;
     case 6:
-        create_vindictive(amount_of_deletion);
+        create_vindictive(amount_of_insertion);
+        TypeOfPsyche.Vindictive =  amount_of_insertion; //  сохраняю типов
         break;
     case 7:
-        create_random(amount_of_deletion);
+        create_random(amount_of_insertion);
+       TypeOfPsyche.Random =  amount_of_insertion; // сохраняю типов
         break;
     case 8:
-        create_Persistent(amount_of_deletion);
+        create_Persistent(amount_of_insertion);
+      TypeOfPsyche.Persistent =  amount_of_insertion; // сохраняю типов
         break;
     case 9:
-        create_forgiving(amount_of_deletion);
+        create_forgiving(amount_of_insertion);
+       TypeOfPsyche.Forgiving =  amount_of_insertion; // сохраняю типов
         break;
     default:
-        break;
+        break;       
     }
 
 }
 void environment::game() {
-    try{
-
-    if(n == 0)
-    {
-    throw my_exception (1);
-    }
-
-    if( n == 1)
-    {
-    throw my_exception (2);
-    }
-
-    for (int r = 0; r < rounds; r++) {        // rounds
+    // Game / Counting money      // rounds
+    for (int r = 0; r < rounds; r++) {
         reset_money();
         for (int i = 0; i < n; i++)           // Each human
             for (int j = i + 1; j < n; j++) { // Plays with the remaining one
@@ -222,13 +183,8 @@ void environment::game() {
                     continue;
                 }
             }
-        arr.insertionSort();
         output_types();
         output_arr();
         min_to_max();
     }
-    }
-
-    catch (my_exception ex) {}
-    catch (my_exception ex) {}
 }

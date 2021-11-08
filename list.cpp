@@ -155,17 +155,21 @@ void list::sortedInsert(node** head_ref, node** tail_ref, node* newNode)
 {
     node* current;
 
+    // if list is empty
     if (*head_ref == NULL) {
         *head_ref = newNode;
         *tail_ref = newNode;
         return;
     }
+    // if the node is to be inserted at the beginning
+    // of the doubly linked list
     if ((*head_ref)->data->get_money() <= newNode->data->get_money()) {
         newNode->next = *head_ref;
         newNode->next->prev = newNode;
         *head_ref = newNode;
         return;
     }
+
     if ((*tail_ref)->data->get_money() >= newNode->data->get_money()) {
         newNode->prev = *tail_ref;
         newNode->prev->next = newNode;
@@ -175,12 +179,18 @@ void list::sortedInsert(node** head_ref, node** tail_ref, node* newNode)
 
     current = *head_ref;
 
+    // locate the node after which the new node
+    // is to be inserted
     while (current->next != NULL &&
-           current->next->data->get_money() > newNode->data->get_money())
+        current->next->data->get_money() > newNode->data->get_money())
         current = current->next;
+
+    /*Make the appropriate links */
 
     newNode->next = current->next;
 
+    // if the new node is not inserted
+    // at the end of the list
     if (current->next != NULL)
         newNode->next->prev = newNode;
 
@@ -191,12 +201,22 @@ void list::insertionSort() {
     node* sorted_head = NULL;
     node* sorted_tail = NULL;
     node* current = head;
+
+    // Traverse the given doubly linked list and
+    // insert every node to 'sorted'
     while (current != NULL) {
         node* next = current->next;
+
         current->prev = current->next = NULL;
+
+        // insert current in 'sorted' doubly linked list
         sortedInsert(&sorted_head, &sorted_tail, current);
+
+        // Update current
         current = next;
     }
+
+    // Update head_ref to point to sorted doubly linked list
     head = sorted_head;
     tail = sorted_tail;
 }
