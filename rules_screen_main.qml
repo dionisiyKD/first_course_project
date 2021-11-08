@@ -15,6 +15,6 @@ Window {
     StackView {
         id: stackview
         anchors.fill: parent
-        initialItem: "qrc:/content/rules_screen_1.qml"
+        initialItem: "qrc:/content/rules_screen_0.qml"
     }
 }

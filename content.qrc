@@ -28,6 +28,7 @@
         <file>rules_screen_7.qml</file>
         <file>rules_screen_8.qml</file>
         <file>rules_screen_9.qml</file>
-
+        <file>rules_screen_0.qml</file>
+        <file>images/rules.png</file>
     </qresource>
 </RCC>
