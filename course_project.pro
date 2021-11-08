@@ -30,6 +30,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     MainWindow.qml \
     game_screen.qml \
+    rules_screen_0.qml \
     rules_screen_1.qml \
     rules_screen_2.qml \
     rules_screen_3.qml \
