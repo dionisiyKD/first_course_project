@@ -9,6 +9,7 @@ class environment {
     list arr;                // Array of humans
     int rounds;              // Number of rounds
     int amount_of_deletion;  // Amount of deletion after round
+    bool show_every_round;   // Will it show results of every round
 public:
     environment();
     ~environment();
@@ -23,19 +24,20 @@ public:
     void create_Persistent(int amount);
     void create_forgiving(int amount);
 
-    int get_number();
+    int  get_number();
+    int  get_rounds();
+    void set_rounds(int a);
+    int  get_amount_of_deletion();
+    void set_amount_of_deletion(int a);
+    bool get_flag();
+    void set_flag(bool a);
 
     void remove_element_from_tail(int amount);
     void reset_money();
 
-    int  get_rounds();
-    void set_rounds(int a);
-
-    int  get_amount_of_deletion();
-    void set_amount_of_deletion(int a);
-
     void output_arr();
     void output_types();
+
     void min_to_max();
     void game();
 

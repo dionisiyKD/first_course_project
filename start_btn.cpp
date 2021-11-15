@@ -25,8 +25,10 @@ void Start_btn::btn_clicked(int n1, int n2, int n3, int n4, int n5, int n6, int 
 
     A.set_rounds(5);
     A.set_amount_of_deletion(2);
+    A.set_flag(1);
+
     A.game();
 
-    cout << "Total result:\n\n";
-   // A.output_types();
+    cout << "\nTotal result:\n";
+    A.output_types();
 }

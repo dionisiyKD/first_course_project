@@ -5,8 +5,8 @@
 using namespace std;
 
 environment::environment() {
-    n = 0;
     rounds = 1;
+    n = 0;
 }
 environment::~environment() {}
 
@@ -74,8 +74,7 @@ void environment::create_forgiving(int amount) {
     }
 }
 
-
-int environment::get_number(){
+int  environment::get_number(){
     return n;
 }
 int  environment::get_rounds(){
@@ -89,6 +88,12 @@ int  environment::get_amount_of_deletion(){
 }
 void environment::set_amount_of_deletion(int a){
     amount_of_deletion = a;
+}
+bool environment::get_flag(){
+    return show_every_round;
+}
+void environment::set_flag(bool a){
+    show_every_round = a;
 }
 
 void environment::remove_element_from_tail(int amount) {
@@ -179,56 +184,61 @@ void environment::min_to_max() {
 void environment::game() {
     try{
 
-    if(n == 0)
-    {
-    throw my_exception (1);
-    }
+        // В теории, можно сделать чтоб оно проверяло не отдельно 0 и 1,
+        // а просто меньше 2. Звучит логичнее, как по мне
+        if(n == 0)
+            throw my_exception (1);
+        if( n == 1)
+            throw my_exception (2);
 
-    if( n == 1)
-    {
-    throw my_exception (2);
-    }
+        for (int r = 0; r < rounds; r++) {
+            reset_money();
+            for (int i = 0; i < n; i++)
+                for (int j = i + 1; j < n; j++) {
+                    bool trust_a = arr.get_data(i)->will_i_trust();
+                    bool trust_b = arr.get_data(j)->will_i_trust();
+                    if (trust_a && trust_b) {
+                        arr.get_data(i)->incr_money(2);
+                        arr.get_data(j)->incr_money(2);
+                        arr.get_data(i)->after_round(trust_b);
+                        arr.get_data(j)->after_round(trust_a);
+                        continue;
+                    }
+                    if (trust_a && !trust_b) {
+                        arr.get_data(i)->decr_money(1);
+                        arr.get_data(j)->incr_money(3);
+                        arr.get_data(i)->after_round(trust_b);
+                        arr.get_data(j)->after_round(trust_a);
+                        continue;
+                    }
+                    if (!trust_a && trust_b) {
+                        arr.get_data(i)->incr_money(3);
+                        arr.get_data(j)->decr_money(1);
+                        arr.get_data(i)->after_round(trust_b);
+                        arr.get_data(j)->after_round(trust_a);
+                        continue;
+                    }
+                    if (!trust_a && !trust_b) {
+                        arr.get_data(i)->after_round(trust_b);
+                        arr.get_data(j)->after_round(trust_a);
+                        continue;
+                    }
+                }
+            arr.insertionSort();
 
-    for (int r = 0; r < rounds; r++) {        // rounds
-        reset_money();
-        for (int i = 0; i < n; i++)           // Each human
-            for (int j = i + 1; j < n; j++) { // Plays with the remaining one
-                bool trust_a = arr.get_data(i)->will_i_trust();
-                bool trust_b = arr.get_data(j)->will_i_trust();
-                if (trust_a && trust_b) {
-                    arr.get_data(i)->incr_money(2);
-                    arr.get_data(j)->incr_money(2);
-                    arr.get_data(i)->after_round(trust_b);
-                    arr.get_data(j)->after_round(trust_a);
-                    continue;
-                }
-                if (trust_a && !trust_b) {
-                    arr.get_data(i)->decr_money(1);
-                    arr.get_data(j)->incr_money(3);
-                    arr.get_data(i)->after_round(trust_b);
-                    arr.get_data(j)->after_round(trust_a);
-                    continue;
-                }
-                if (!trust_a && trust_b) {
-                    arr.get_data(i)->incr_money(3);
-                    arr.get_data(j)->decr_money(1);
-                    arr.get_data(i)->after_round(trust_b);
-                    arr.get_data(j)->after_round(trust_a);
-                    continue;
-                }
-                if (!trust_a && !trust_b) {
-                    arr.get_data(i)->after_round(trust_b);
-                    arr.get_data(j)->after_round(trust_a);
-                    continue;
-                }
+            // every round results
+            // also maybe fill the array of results
+            if (show_every_round){
+                output_types();
+                output_arr();
             }
-        arr.insertionSort();
-        output_types();
-        output_arr();
-        min_to_max();
-    }
+
+            min_to_max();
+        }
     }
 
     catch (my_exception ex) {}
     catch (my_exception ex) {}
+    // Второй catch не сработает, ибо ты и так ловишь уже такую ошибку
+    // "my_exception ex" словит ранний кетч, кароче второй тут не нужен
 }
