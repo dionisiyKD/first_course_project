@@ -6,14 +6,15 @@ Rectangle {
     height: 320
     border.color: "black"
     border.width: 3
-
+    signal destroyMe()
+    id: exit_screen_2
     Label {
         id: label
         x: 100
         y: 102
         width: 331
         height: 116
-        text: "Всі гравці не можуть мати\n одинаковий типаж поведінки.\n "
+        text: "Ви впевнені, що готові продовжити?\nПеред початком рекомендується\n прочитати правила!\n "
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         font.pointSize: 14
@@ -44,13 +45,20 @@ Rectangle {
         y: 242
         width: 106
         height: 46
-        text: qsTr("Вийти")
+        text: qsTr("Правила")
         font.pointSize: 13
         background: Rectangle {
             color: "white"
             radius: 3
             border.width: 3
         }
+        onClicked: {
+        var component = Qt.createComponent("qrc:/content/rules_screen_main.qml")
+        var window    = component.createObject(main)
+        main.close()
+        window.show()
+}
+
     }
 
     Button {
@@ -59,12 +67,19 @@ Rectangle {
         y: 242
         width: 100
         height: 46
-        text: qsTr("Скасувати")
+        text: qsTr("Почати")
         font.pointSize: 13
         background: Rectangle {
             color: "white"
             radius: 3
             border.width: 3
+        }
+
+        onClicked: {
+            var component = Qt.createComponent("qrc:/content/game_screen.qml")
+            var window    = component.createObject(main)
+            main.close()
+            window.show()
         }
     }
 }
