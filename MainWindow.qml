@@ -58,18 +58,18 @@ Rectangle {
             font.family: "Verdana"
             font.pointSize: 20
             signal qmlSignal()
-            onClicked: {
-                var component = Qt.createComponent("qrc:/content/game_screen.qml")
-                var window    = component.createObject(main)
-                main.close()
-                window.show()
-            }
             background: Rectangle {
                             color: "white"
                             radius: 3
                             border.width: 3
             }
 
+            onClicked: {
+                var component = Qt.createComponent("qrc:/content/game_screen.qml")
+                var window    = component.createObject(main)
+                main.close()
+                window.show()
+            }
         }
         Button {
             id: rules_btn
@@ -112,6 +112,13 @@ Rectangle {
                             color: "white"
                             radius: 3
                             border.width: 3
+            }
+            onClicked: {
+                var component = Qt.createComponent("qrc:/content/authors_screen.qml")
+
+                var window    = component.createObject(main)
+                main.close()
+                window.show()
             }
 
         }

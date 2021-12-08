@@ -17,7 +17,8 @@ public:
 
     human* get_data(int index);
     int get_count();
-
+    node* get_head();
+    node* get_tail();
     void add_head(human* A);
     void add_tail(human* A);
     void insert_after(int index, human* A);
@@ -30,6 +31,8 @@ public:
 
     void print_from_head();
     void print_from_tail();
+
+    void operator= (const list&);
 };
 
 #endif // LIST_H

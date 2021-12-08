@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     Start_btn btn;
     QQmlApplicationEngine engine;
+    qDebug()<<engine.importPathList();
     app.setQuitOnLastWindowClosed(false);
     const QUrl url(QStringLiteral("qrc:/content/MainWindow.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

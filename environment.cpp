@@ -2,8 +2,9 @@
 #include "environment.h"
 #include "human.h"
 #include "my_exception.h"
-using namespace std;
-
+#include "list.h"
+using  std::cout;
+using  std::endl;
 environment::environment() {
     n = 0;
     rounds = 1;
@@ -74,6 +75,9 @@ void environment::create_forgiving(int amount) {
     }
 }
 
+list* environment::get_arr(){
+    return &arr;
+}
 
 int environment::get_number(){
     return n;
@@ -188,8 +192,7 @@ void environment::game() {
     {
     throw my_exception (2);
     }
-
-    for (int r = 0; r < rounds; r++) {        // rounds
+      // rounds
         reset_money();
         for (int i = 0; i < n; i++)           // Each human
             for (int j = i + 1; j < n; j++) { // Plays with the remaining one
@@ -227,8 +230,6 @@ void environment::game() {
         output_arr();
         min_to_max();
     }
-    }
-
     catch (my_exception ex) {}
     catch (my_exception ex) {}
 }

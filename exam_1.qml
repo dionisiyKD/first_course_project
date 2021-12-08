@@ -54,9 +54,9 @@ signal destroyMe()
         }
         onClicked: {
             exit_screen.destroyMe()
-            /*var component = Qt.createComponent("qrc:/content/MainWindow.qml")
+            var component = Qt.createComponent("qrc:/content/MainWindow.qml")
             var window    = component.createObject(start)
-            window.show() */
+            window.show()
             start.close()
         }
     }

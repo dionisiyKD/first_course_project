@@ -1,20 +1,85 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Window 2.3
+import QtCharts 2.3
 Window {
     id: start
     width: 1280
     height: 720
     visible: true
-
+    property var show_next: null
     property var chose_exit: null
+    property double n1: spinBox.value
+    property double n2: spinBox1.value
+    property double n3: spinBox2.value
+    property double n4: spinBox3.value
+    property double n5: spinBox4.value
+    property double n6: spinBox5.value
+    property double n7: spinBox6.value
+    property double n8: spinBox7.value
+    property double n9: spinBox8.value
+    property var result: []
+        function game() {
+
+            result = Btn_Click.btn_clicked(parseInt(n1), parseInt(n2), parseInt(n3), parseInt(n4), parseInt(n5), parseInt(n6),  parseInt(n7), parseInt(n8), parseInt(n9), parseInt(textField2.text), parseInt(textField1.text))
+            textField2.text = parseInt(textField2.text) - 1
+            if(parseInt(textField2.text) === 0) textField2.text = parseInt(textField2.text) + 1
+
+            if(radioButton.position) {
+                create_show_next(result)
+            }
+            change_amounts(result)
+        }
+        function change_amounts(arr) {
+            var i = 0
+            n1 = 0
+            n2 = 0
+            n3 = 0
+            n4 = 0
+            n5 = 0
+            n6 = 0
+            n7 = 0
+            n8 = 0
+            n9 = 0
+            do {
+            switch (arr[i]){
+            case 1:
+                n2 += 1.0
+                break
+            case 2:
+                n8 += 1.0
+                break
+            case 3:
+                n7 += 1.0
+                break
+            case 4:
+                n5 += 1.0
+                break
+            case 5:
+                n4 += 1.0
+                break
+            case 6:
+                n1 += 1.0
+                break
+            case 7:
+                n9 += 1.0
+                break
+            case 8:
+                n3 += 1.0
+                break
+            case 9:
+                n6 += 1.0
+                break
+            }
+            i += 2
+            } while( i < arr.length)
+        }
 
         function create_chose_exit() {
             if ( chose_exit === null ) {
                 var component = Qt.createComponent( "qrc:/content/exam_1.qml" )
                 chose_exit = component.createObject( start, {"x":start.width/4,"y":start.height*0.2})
                 if ( chose_exit ) {
-
                     chose_exit.destroyMe.connect( destroy_chose_exit )
                 }
             }
@@ -26,6 +91,25 @@ Window {
                 chose_exit = null
             }
         }
+
+
+        function create_show_next(mas){
+            if (show_next === null){
+                var component2 = Qt.createComponent( "qrc:/content/res_screen.qml" )
+                show_next = component2.createObject( start, {"x":280,"y":120})
+                show_next.setStuff(mas)
+                if ( show_next ) {
+                    show_next.destroyMe.connect( destroy_chose_show )
+                }
+            }
+        }
+        function destroy_chose_show() {
+            if ( show_next !== null ) {
+                show_next.destroy()
+                show_next = null
+            }
+        }
+
     Rectangle {
         width: parent.width
         height: parent.height
@@ -46,10 +130,6 @@ Window {
             border.color: "black"
         }
         onClicked: {
-          /*  var component = Qt.createComponent("qrc:/content/MainWindow.qml")
-            var window    = component.createObject(start)
-            start.close()
-            window.show() */
             create_chose_exit()
         }
     }
@@ -366,9 +446,9 @@ Window {
     Rectangle {
         id: amount_of_players
         x: 705
-        y: 53
+        y: 5
         width: 674
-        height: 110
+        height: 180
         color: "#ffffff"
         border.width: 3
         scale: 0.6
@@ -376,8 +456,8 @@ Window {
 
         Label {
             id: label9
-            x: 50
-            y: 29
+            x: 5
+            y: 32
             text: qsTr("Кількість гравців: ")
             scale: 0.8
             font.bold: true
@@ -387,198 +467,54 @@ Window {
 
         TextField {
             id: textField
-            x: 433
-            y: 35
+            x: 495
+            y: 37
             width: 139
             height: 40
-            font.pointSize: 21
-            placeholderText: qsTr("0")
-            inputMethodHints: Qt.ImhDigitsOnly
+            font.pointSize: 23
+            placeholderText: "0"
+            scale: 1
+            background: Rectangle {
+                color: "white"
+                border.width: 3
+                border.color: "black"
+            }
             validator: IntValidator {
-                    bottom: 1
-                    top: 10
-                }
+                bottom: 1
+                top: 10
+            }
         }
-    }
 
-    Image {
-        id: detective
-        x: 467
-        y: 29
-        width: 205
-        height: 340
-        source: "images/Detective_img.png"
-        sourceSize.width: 345
-        scale: 0.7
-        fillMode: Image.Stretch
-    }
+        Label {
+            id: label20
+            x: -3
+            y: 93
+            text: qsTr("Кількість видаляємих:")
+            scale: 0.8
+            font.family: "Verdana"
+            font.pointSize: 29
+            font.bold: true
+        }
 
-    Image {
-        id: distrustful
-        x: 451
-        y: 303
-        width: 206
-        height: 338
-        source: "images/Distrustful_img.png"
-        sourceSize.width: 345
-        scale: 0.7
-        fillMode: Image.Stretch
-    }
-
-    Image {
-        id: forgiving
-        x: 198
-        y: 307
-        width: 208
-        height: 342
-        source: "images/Forgiving_img.png"
-        sourceSize.width: 345
-        scale: 0.7
-        fillMode: Image.Stretch
-    }
-
-    Image {
-        id: naive
-        x: 215
-        y: 19
-        width: 209
-        height: 352
-        source: "images/Naive_img.png"
-        sourceSize.width: 345
-        scale: 0.7
-        fillMode: Image.Stretch
-    }
-
-    Image {
-        id: persistent
-        x: 329
-        y: 23
-        width: 209
-        height: 344
-        source: "images/Persistent_img.png"
-        sourceSize.width: 345
-        scale: 0.7
-        fillMode: Image.Stretch
-    }
-
-    Image {
-        id: tricky
-        x: 71
-        y: 317
-        width: 204
-        height: 336
-        source: "images/Tricky_img.png"
-        sourceSize.width: 345
-        scale: 0.7
-        fillMode: Image.Stretch
-    }
-
-    Image {
-        id: random
-        x: 607
-        y: 157
-        width: 207
-        height: 349
-        source: "images/Random_img.png"
-        sourceSize.width: 345
-        scale: 0.7
-        fillMode: Image.Stretch
-    }
-
-    Image {
-        id: simulator
-        x: 328
-        y: 296
-        width: 211
-        height: 346
-        source: "images/Simulator_img.png"
-        sourceSize.width: 345
-        scale: 0.7
-        fillMode: Image.Stretch
-    }
-
-    Image {
-        id: vindictive
-        x: 85
-        y: 20
-        width: 215
-        height: 346
-        source: "images/Vindictive_img.png"
-        sourceSize.width: 345
-        scale: 0.7
-        fillMode: Image.Stretch
-    }
-
-    Label {
-        id: label
-        x: 158
-        y: 585
-        text: qsTr("0")
-        font.pointSize: 21
-    }
-
-    Label {
-        id: label1
-        x: 280
-        y: 584
-        text: qsTr("0")
-        font.pointSize: 21
-    }
-
-    Label {
-        id: label2
-        x: 417
-        y: 585
-        text: qsTr("0")
-        font.pointSize: 21
-    }
-
-    Label {
-        id: label3
-        x: 537
-        y: 585
-        text: qsTr("0")
-        font.pointSize: 21
-    }
-
-    Label {
-        id: label4
-        x: 174
-        y: 291
-        text: qsTr("0")
-        font.pointSize: 21
-    }
-
-    Label {
-        id: label5
-        x: 295
-        y: 290
-        text: qsTr("0")
-        font.pointSize: 21
-    }
-
-    Label {
-        id: label6
-        x: 417
-        y: 289
-        text: qsTr("0")
-        font.pointSize: 21
-    }
-
-    Label {
-        id: label7
-        x: 553
-        y: 288
-        text: qsTr("0")
-        font.pointSize: 21
-    }
-
-    Label {
-        id: label8
-        x: 698
-        y: 418
-        text: qsTr("0")
-        font.pointSize: 21
+        TextField {
+            id: textField1
+            x: 495
+            y: 98
+            width: 139
+            height: 40
+            scale: 1
+            placeholderText: "0"
+            font.pointSize: 23
+            background: Rectangle {
+                color: "white"
+                border.width: 3
+                border.color: "black"
+            }
+            validator: IntValidator {
+                bottom: 1
+                top: 10
+            }
+        }
     }
     Button {
         id: start_the_game
@@ -598,18 +534,144 @@ Window {
         }
 
         onClicked: {
-            label4.text = spinBox.value
-            label5.text = spinBox1.value
-            label6.text = spinBox2.value
-            label7.text = spinBox3.value
-            label.text = spinBox4.value
-            label1.text = spinBox5.value
-            label2.text = spinBox6.value
-            label3.text = spinBox7.value
-            label8.text = spinBox8.value
-            Btn_Click.btn_clicked(spinBox.value, spinBox1.value, spinBox2.value, spinBox3.value, spinBox4.value, spinBox5.value, spinBox6.value, spinBox7.value, spinBox8.value)
+            spinBox.enabled = false
+            spinBox1.enabled = false
+            spinBox2.enabled = false
+            spinBox3.enabled = false
+            spinBox4.enabled = false
+            spinBox5.enabled = false
+            spinBox6.enabled = false
+            spinBox7.enabled = false
+            spinBox8.enabled = false
+
+            next_button.visible = true
+            next_button.enabled = true
+            start_the_game.enabled = false
+
+            textField.enabled = false
+            textField1.enabled = false
+            textField2.enabled = false
+            game()
         }
     }
+    ChartView {
+        id: pie
+        x: 98
+        y: 75
+        width: 675
+        height: 515
+        PieSeries {
+            name: "PieSeries"
+            PieSlice {
+                value: n1
+                color: "#e1802b"
+            }
 
+            PieSlice {
+                value: n2
+                color: "#f68b9d"
+            }
+
+            PieSlice {
+                value: n3
+                color: "#882bcc"
+            }
+            PieSlice {
+                value: n4
+                color: "#1368c4"
+            }
+
+            PieSlice {
+                value: n5
+                color: "#49b100"
+            }
+
+            PieSlice {
+                value: n6
+                color: "#424242"
+            }
+            PieSlice {
+                value: n7
+                color: "#709de1"
+            }
+
+            PieSlice {
+                value: n8
+                color: "#e11529"
+            }
+
+            PieSlice {
+                value: n9
+                color: "#47a369"
+            }
+        }
+        Button {
+            id: next_button
+            x: 366
+            y: 441
+            width: 264
+            height: 45
+            text: qsTr("Далі")
+            background: Rectangle {
+                color: "white"
+                border.width: 3
+                border.color: "black"
+            }
+            font.styleName: "#000000"
+            font.weight: Font.ExtraBold
+            font.capitalization: Font.MixedCase
+            font.family: "Verdana"
+            font.pointSize: 20
+            visible: false;
+            enabled: false;
+            onClicked: game()
+        }
+    }
+    Rectangle {
+        id: rectangle9
+        x: 46
+        y: 628
+        width: 750
+        height: 72
+        color: "#ffffff"
+        border.width: 3
+        border.color: "black"
+
+        Switch {
+            id: radioButton
+            x: 460
+            y: 5
+            width: 244
+            height: 63
+            text: qsTr("Показувати результат\n кожного раунда")
+            font.pointSize: 13
+            font.family: "Verdana"
+        }
+        Label {
+            id: label123
+            x: 5
+            y: 21
+            text: qsTr("Кількість раундів: ")
+            scale: 0.8
+            font.bold: true
+            font.family: "Verdana"
+            font.pointSize: 16
+        }
+
+        TextField {
+            id: textField2
+            x: 252
+            y: 16
+            width: 139
+            height: 40
+            font.pointSize: 23
+            placeholderText: "0"
+            scale: 1
+            validator: IntValidator {
+                bottom: 1
+                top: 10
+            }
+        }
+    }
 }
 

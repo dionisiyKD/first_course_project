@@ -24,6 +24,7 @@ public:
     void create_forgiving(int amount);
 
     int get_number();
+    list* get_arr();
 
     void remove_element_from_tail(int amount);
     void reset_money();
