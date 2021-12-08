@@ -1,8 +1,9 @@
 #include "iostream"
 #include "list.h"
 #include "human.h"
-using namespace std;
-
+using std::cin;
+using std::cout;
+using std::endl;
 list::list() {
     head = NULL;
     tail = NULL;
@@ -24,6 +25,13 @@ human* list::get_data(int index) {
 }
 int  list::get_count() {
     return count;
+}
+
+node* list::get_head(){
+    return head;
+}
+node* list::get_tail(){
+    return tail;
 }
 void list::add_head(human* A) {
     node* tmp = new node;
@@ -199,4 +207,9 @@ void list::insertionSort() {
     }
     head = sorted_head;
     tail = sorted_tail;
+}
+void list::operator = (const list& other){
+    this->head = other.head;
+    this->tail = other.tail;
+    this->count = other.count;
 }

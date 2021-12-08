@@ -29,5 +29,9 @@
         <file>exam_5.qml</file>
         <file>rules_screen_0.qml</file>
         <file>images/rules.png</file>
+        <file>res_screen.qml</file>
+        <file>authors_screen.qml</file>
+        <file>images/Authors_img.png</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>

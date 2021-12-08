@@ -59,7 +59,6 @@ signal destroyMe()
             /*var component = Qt.createComponent("qrc:/content/MainWindow.qml")
             var window    = component.createObject(start)
             window.show() */
-
         }
     }
 

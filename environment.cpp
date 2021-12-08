@@ -2,8 +2,9 @@
 #include "environment.h"
 #include "human.h"
 #include "my_exception.h"
-using namespace std;
-
+#include "list.h"
+using  std::cout;
+using  std::endl;
 environment::environment() {
     rounds = 1;
     n = 0;
@@ -73,7 +74,9 @@ void environment::create_forgiving(int amount) {
         arr.add_head(a);
     }
 }
-
+list* environment::get_arr(){
+    return &arr;
+}
 int  environment::get_number(){
     return n;
 }
@@ -190,53 +193,44 @@ void environment::game() {
             throw my_exception (1);
         if( n == 1)
             throw my_exception (2);
+        reset_money();
+        for (int i = 0; i < n; i++)           // Each human
+            for (int j = i + 1; j < n; j++) { // Plays with the remaining one
+                bool trust_a = arr.get_data(i)->will_i_trust();
+                bool trust_b = arr.get_data(j)->will_i_trust();
+                if (trust_a && trust_b) {
+                    arr.get_data(i)->incr_money(2);
+                    arr.get_data(j)->incr_money(2);
+                    arr.get_data(i)->after_round(trust_b);
+                    arr.get_data(j)->after_round(trust_a);
+                    continue;
+                }
+                if (trust_a && !trust_b) {
+                    arr.get_data(i)->decr_money(1);
+                    arr.get_data(j)->incr_money(3);
+                    arr.get_data(i)->after_round(trust_b);
+                    arr.get_data(j)->after_round(trust_a);
+                    continue;
+                }
+                if (!trust_a && trust_b) {
+                    arr.get_data(i)->incr_money(3);
+                    arr.get_data(j)->decr_money(1);
+                    arr.get_data(i)->after_round(trust_b);
+                    arr.get_data(j)->after_round(trust_a);
+                    continue;
+                }
+                if (!trust_a && !trust_b) {
+                    arr.get_data(i)->after_round(trust_b);
+                    arr.get_data(j)->after_round(trust_a);
+                    continue;
 
-        for (int r = 0; r < rounds; r++) {
-            reset_money();
-            for (int i = 0; i < n; i++)
-                for (int j = i + 1; j < n; j++) {
-                    bool trust_a = arr.get_data(i)->will_i_trust();
-                    bool trust_b = arr.get_data(j)->will_i_trust();
-                    if (trust_a && trust_b) {
-                        arr.get_data(i)->incr_money(2);
-                        arr.get_data(j)->incr_money(2);
-                        arr.get_data(i)->after_round(trust_b);
-                        arr.get_data(j)->after_round(trust_a);
-                        continue;
-                    }
-                    if (trust_a && !trust_b) {
-                        arr.get_data(i)->decr_money(1);
-                        arr.get_data(j)->incr_money(3);
-                        arr.get_data(i)->after_round(trust_b);
-                        arr.get_data(j)->after_round(trust_a);
-                        continue;
-                    }
-                    if (!trust_a && trust_b) {
-                        arr.get_data(i)->incr_money(3);
-                        arr.get_data(j)->decr_money(1);
-                        arr.get_data(i)->after_round(trust_b);
-                        arr.get_data(j)->after_round(trust_a);
-                        continue;
-                    }
-                    if (!trust_a && !trust_b) {
-                        arr.get_data(i)->after_round(trust_b);
-                        arr.get_data(j)->after_round(trust_a);
-                        continue;
-                    }
                 }
             arr.insertionSort();
 
-            // every round results
-            // also maybe fill the array of results
-            if (show_every_round){
-                output_types();
-                output_arr();
-            }
-
-            min_to_max();
-        }
-    }
-
+        arr.insertionSort();
+        output_types();
+        output_arr();
+        min_to_max();
     catch (my_exception ex) {}
     catch (my_exception ex) {}
     // Второй catch не сработает, ибо ты и так ловишь уже такую ошибку
