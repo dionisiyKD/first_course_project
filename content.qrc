@@ -12,10 +12,6 @@
         <file>images/Simulator_img.png</file>
         <file>images/Tricky_img.png</file>
         <file>images/Vindictive_img.png</file>
-        <file>exam_1.qml</file>
-        <file>exam_2.qml</file>
-        <file>exam_3.qml</file>
-        <file>exam_4.qml</file>
         <file>rules_screen_main.qml</file>
         <file>rules_screen_1.qml</file>
         <file>rules_screen_2.qml</file>
@@ -26,7 +22,6 @@
         <file>rules_screen_7.qml</file>
         <file>rules_screen_8.qml</file>
         <file>rules_screen_9.qml</file>
-        <file>exam_5.qml</file>
         <file>rules_screen_0.qml</file>
         <file>images/rules.png</file>
         <file>res_screen.qml</file>

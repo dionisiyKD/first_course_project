@@ -1,5 +1,3 @@
-#include <QGuiApplication>
-#include <QQmlEngine>
 #include <QQmlApplicationEngine>
 #include <QQmlFileSelector>
 #include <QQuickView>
