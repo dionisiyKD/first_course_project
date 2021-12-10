@@ -33,12 +33,13 @@ QList<int> Start_btn::btn_clicked(int n1, int n2, int n3, int n4, int n5, int n6
     A.set_amount_of_deletion(n11);
     A.game();
     Glist = A.get_arr();
-    for (int i = 0; i < res_count; i++){
-        res << Glist->get_data(i)->get_type() ;
-        res << Glist->get_data(i)->get_money();
-    }
+for (int i = 0; i < res_count; i++){
+    res << Glist->get_data(i)->get_type() ;
+    res << Glist->get_data(i)->get_money();
+    cout <<Glist->get_data(i)->get_type()<< "\n";
+    cout << Glist->get_data(i)->get_money()<< "\n";
+}
     cout << "Totel result:\n\n";
-
     A.output_types();
     le = res;
     return res;

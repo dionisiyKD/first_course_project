@@ -75,24 +75,6 @@ Window {
             } while( i < arr.length)
         }
 
-        function create_chose_exit() {
-            if ( chose_exit === null ) {
-                var component = Qt.createComponent( "qrc:/content/exam_1.qml" )
-                chose_exit = component.createObject( start, {"x":start.width/4,"y":start.height*0.2})
-                if ( chose_exit ) {
-                    chose_exit.destroyMe.connect( destroy_chose_exit )
-                }
-            }
-        }
-
-        function destroy_chose_exit() {
-            if ( chose_exit !== null ) {
-                chose_exit.destroy()
-                chose_exit = null
-            }
-        }
-
-
         function create_show_next(mas){
             if (show_next === null){
                 var component2 = Qt.createComponent( "qrc:/content/res_screen.qml" )
@@ -109,7 +91,6 @@ Window {
                 show_next = null
             }
         }
-
 
     Rectangle {
         width: parent.width
@@ -131,7 +112,7 @@ Window {
             border.color: "black"
         }
         onClicked: {
-            create_chose_exit()
+            Qt.quit()
         }
     }
     Rectangle {
