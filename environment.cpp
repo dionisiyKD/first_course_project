@@ -181,18 +181,6 @@ void environment::min_to_max() {
 
 }
 void environment::game() {
-    try{
-
-    if(n == 0)
-    {
-    throw my_exception (1);
-    }
-
-    if( n == 1)
-    {
-    throw my_exception (2);
-    }
-      // rounds
         reset_money();
         for (int i = 0; i < n; i++)           // Each human
             for (int j = i + 1; j < n; j++) { // Plays with the remaining one
@@ -230,6 +218,4 @@ void environment::game() {
         output_arr();
         min_to_max();
     }
-    catch (my_exception ex) {}
-    catch (my_exception ex) {}
-}
+
